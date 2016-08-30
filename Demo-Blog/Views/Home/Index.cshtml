@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@model IEnumerable<Demo_Blog.Models.Post>
+
+<div class="jumbotron">
+    <h1>SoftUni Blog</h1>
+</div>
+
+<section class="row">
+    
+    @foreach (var post in Model)
+    {
+        <div class="post col-md-4">
+            <h2 class="title"><a href="/Posts/Details/@post.Id">@Demo_Blog.Classes.Utilis.CutText(post.Title, 20)</a></h2>
+            <div class="about">
+                Created on <i>@post.Date</i>
+                @if (@post.Author != null && @post.Author.FullName != null)
+                {
+                    @:by <i>@post.Author.FullName (@post.Author.UserName)</i>
+                }
+                @if (@post.Author != null && @post.Author.FullName == null)
+                {
+                    @:by <i>@post.Author.UserName</i>
+                }
+                
+            </div>
+            <div class="body">@Demo_Blog.Classes.Utilis.CutText(post.Body)</div>
+        </div>
+    }
+</section>
